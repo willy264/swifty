@@ -49,7 +49,7 @@ export default async function AirdropDetailPage(
 
       <div className="grid gap-4 lg:grid-cols-[minmax(0,1.15fr)_minmax(320px,0.85fr)]">
         <div className="space-y-4">
-          <div className="panel-card rounded-[1.9rem] p-5 sm:p-6">
+          <div className="panel-card p-5 sm:p-6">
             <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
               {[
                 {
@@ -78,7 +78,7 @@ export default async function AirdropDetailPage(
               ].map((item) => (
                 <div
                   key={item.label}
-                  className="rounded-[1.35rem] border border-border bg-white/[0.03] px-4 py-4"
+                  className="border border-border bg-white/[0.03] px-4 py-4"
                 >
                   <div className="flex items-center gap-2 text-text-muted">
                     <item.icon size={14} />
@@ -109,7 +109,7 @@ export default async function AirdropDetailPage(
                 </ul>
               </div>
 
-              <div className="rounded-[1.55rem] border border-border bg-white/[0.03] p-4">
+              <div className="border border-border bg-white/[0.03] p-4">
                 <p className="section-kicker">Project links</p>
                 <div className="mt-4 space-y-3">
                   {website ? (
@@ -117,7 +117,7 @@ export default async function AirdropDetailPage(
                       href={website}
                       target="_blank"
                       rel="noreferrer"
-                      className="block rounded-2xl border border-border px-4 py-3 text-sm text-text-soft transition hover:border-border-strong hover:text-white"
+                      className="block border border-border px-4 py-3 text-sm text-text-soft transition hover:border-border-strong hover:text-white"
                     >
                       Website
                       <span className="mt-1 block text-xs text-text-muted">
@@ -130,7 +130,7 @@ export default async function AirdropDetailPage(
                       href={twitter}
                       target="_blank"
                       rel="noreferrer"
-                      className="block rounded-2xl border border-border px-4 py-3 text-sm text-text-soft transition hover:border-border-strong hover:text-white"
+                      className="block border border-border px-4 py-3 text-sm text-text-soft transition hover:border-border-strong hover:text-white"
                     >
                       X / Twitter
                       <span className="mt-1 block text-xs text-text-muted">
@@ -150,7 +150,7 @@ export default async function AirdropDetailPage(
         </div>
 
         <div className="space-y-4">
-          <div className="panel-card rounded-[1.9rem] p-5">
+          <div className="panel-card p-5">
             <p className="section-kicker">Join decision</p>
             <h2 className="mt-2 font-display text-2xl font-semibold text-white">
               Proceed only with bounded risk
@@ -167,7 +167,7 @@ export default async function AirdropDetailPage(
             </div>
           </div>
 
-          <div className="panel-card rounded-[1.9rem] p-5">
+          <div className="panel-card p-5">
             <p className="section-kicker">Recommended flow</p>
             <div className="mt-4 space-y-3">
               {[
@@ -178,7 +178,7 @@ export default async function AirdropDetailPage(
               ].map((item, index) => (
                 <div
                   key={item}
-                  className="rounded-2xl border border-border bg-white/[0.03] px-4 py-3 text-sm text-text-soft"
+                  className="border border-border bg-white/[0.03] px-4 py-3 text-sm text-text-soft"
                 >
                   <span className="mr-2 font-data text-accent">0{index + 1}</span>
                   {item}

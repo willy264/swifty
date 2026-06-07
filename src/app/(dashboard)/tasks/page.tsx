@@ -152,7 +152,7 @@ export default function TasksPage() {
               ].map((item, index) => (
                 <div
                   key={item}
-                  className="rounded-xl border border-border bg-white/[0.03] p-5 hover:border-accent transition-colors"
+                  className="border border-border bg-white/[0.03] p-5 hover:border-accent transition-colors"
                 >
                   <div className="flex gap-4">
                     <span className="font-mono text-xs text-accent">0{index + 1}</span>

@@ -86,7 +86,7 @@ export default async function AlertsPage() {
             body: "Sent when a wallet scan surfaces suspicious contracts or dangerous approvals worth immediate action.",
           },
         ].map((card) => (
-          <div key={card.title} className="panel-card rounded-[1.8rem] p-5">
+          <div key={card.title} className="panel-card p-5">
             <p className="section-kicker">Notification flow</p>
             <h2 className="mt-2 font-display text-2xl font-semibold text-white">
               {card.title}

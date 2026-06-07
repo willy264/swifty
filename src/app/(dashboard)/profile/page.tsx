@@ -61,7 +61,7 @@ export default async function ProfilePage() {
       </div>
 
       <div className="grid gap-4 xl:grid-cols-[minmax(0,1fr)_minmax(320px,0.9fr)]">
-        <section className="panel-card rounded-[1.9rem] p-5 sm:p-6">
+        <section className="panel-card p-5 sm:p-6">
           <p className="section-kicker">Account snapshot</p>
           <div className="mt-4 grid gap-4 md:grid-cols-2">
             {[
@@ -84,7 +84,7 @@ export default async function ProfilePage() {
             ].map((item) => (
               <div
                 key={item.label}
-                className="rounded-[1.45rem] border border-border bg-white/[0.03] px-4 py-4"
+                className="border border-border bg-white/[0.03] px-4 py-4"
               >
                 <p className="text-[0.68rem] uppercase tracking-[0.2em] text-text-muted">
                   {item.label}
@@ -107,7 +107,7 @@ export default async function ProfilePage() {
         </section>
 
         <section className="space-y-4">
-          <div className="panel-card rounded-[1.9rem] p-5">
+          <div className="panel-card p-5">
             <p className="section-kicker">Badge state</p>
             <div className="mt-4 flex flex-wrap gap-2">
               {stats?.badges?.length ? (
@@ -122,7 +122,7 @@ export default async function ProfilePage() {
             </div>
           </div>
 
-          <div className="panel-card rounded-[1.9rem] p-5">
+          <div className="panel-card p-5">
             <p className="section-kicker">Profile role in the product</p>
             <p className="mt-3 text-sm leading-7 text-text-soft">
               This page gives the user one anchor for identity and progress. In the

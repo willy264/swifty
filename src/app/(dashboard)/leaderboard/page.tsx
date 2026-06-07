@@ -82,7 +82,7 @@ export default async function LeaderboardPage() {
         </section>
 
         <section className="space-y-4">
-          <div className="panel-card rounded-[1.9rem] p-5">
+          <div className="panel-card p-5">
             <p className="section-kicker">Referral structure</p>
             <h2 className="mt-2 font-display text-2xl font-semibold text-white">
               Share loop and rewards
@@ -91,7 +91,7 @@ export default async function LeaderboardPage() {
               {dashboard.referrals?.referrals.map((referral) => (
                 <div
                   key={referral.id}
-                  className="rounded-2xl border border-border bg-white/[0.03] px-4 py-3"
+                  className="border border-border bg-white/[0.03] px-4 py-3"
                 >
                   <p className="text-sm font-semibold text-white">
                     {referral.referredUser.username
@@ -106,7 +106,7 @@ export default async function LeaderboardPage() {
             </div>
           </div>
 
-          <div className="panel-card rounded-[1.9rem] p-5">
+          <div className="panel-card p-5">
             <p className="section-kicker">Retention intent</p>
             <p className="mt-3 text-sm leading-7 text-text-soft">
               Your documents were clear that this should feel like a daily

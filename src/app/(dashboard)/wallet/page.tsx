@@ -106,7 +106,7 @@ export default async function WalletPage() {
         )}
 
         <section className="space-y-4">
-          <div className="panel-card rounded-[1.9rem] p-5">
+          <div className="panel-card p-5">
             <p className="section-kicker">Guardrails</p>
             <h2 className="mt-2 font-display text-2xl font-semibold text-white">
               Recommended actions
@@ -116,20 +116,20 @@ export default async function WalletPage() {
                 liveAnalysis.recommendations.map((item) => (
                   <div
                     key={item}
-                    className="rounded-2xl border border-border bg-white/[0.03] px-4 py-3 text-sm text-text-soft"
+                    className="border border-border bg-white/[0.03] px-4 py-3 text-sm text-text-soft"
                   >
                     {item}
                   </div>
                 ))
               ) : (
-                <div className="rounded-2xl border border-border bg-white/[0.03] px-4 py-3 text-sm text-text-soft">
+                <div className="border border-border bg-white/[0.03] px-4 py-3 text-sm text-text-soft">
                   No live recommendation payload available.
                 </div>
               )}
             </div>
           </div>
 
-          <div className="panel-card rounded-[1.9rem] p-5">
+          <div className="panel-card p-5">
             <p className="section-kicker">Why this screen exists</p>
             <p className="mt-3 text-sm leading-7 text-text-soft">
               The docs describe this stage as the moment users should feel safer and

@@ -202,7 +202,7 @@ export default function CommandPage() {
                   className="data-row px-5 py-4"
                 >
                   <div className="flex items-center gap-4">
-                    <div className="w-8 h-8 rounded-lg bg-white/[0.03] border border-border flex items-center justify-center font-mono text-[10px] text-accent">
+                    <div className="w-8 h-8 bg-white/[0.03] border border-border flex items-center justify-center font-mono text-[10px] text-accent">
                       {index + 1}
                     </div>
                     <div>
@@ -300,7 +300,7 @@ export default function CommandPage() {
             ].map((item) => (
               <div
                 key={item.title}
-                className="rounded-xl border-2 border-border bg-white/[0.03] p-5 hover:border-accent transition-colors"
+                className="border-2 border-border bg-white/[0.03] p-5 hover:border-accent transition-colors"
               >
                 <p className="text-sm font-bold text-white tracking-widest">{item.title}</p>
                 <p className="mt-3 text-xs leading-relaxed text-text-sub font-medium">{item.body}</p>

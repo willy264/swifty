@@ -70,7 +70,7 @@ export function MetricTile({
   return (
     <div className="metric-tile group">
       <div className="flex items-center gap-2 mb-4">
-        <div className="w-8 h-8 rounded-lg bg-white/[0.03] border border-border flex items-center justify-center group-hover:border-accent/30 transition-colors">
+        <div className="w-8 h-8 bg-white/[0.03] border border-border flex items-center justify-center group-hover:border-accent/30 transition-colors">
           <Icon
             size={14}
             className="text-text-muted group-hover:text-accent transition-colors"
@@ -120,7 +120,7 @@ export function AirdropCard({
             </h3>
           </div>
           <div
-            className={`text-sm font-display font-bold shrink-0 bg-white/[0.03] px-3 py-1.5 border border-border rounded-lg ${trustTone}`}
+            className={`text-sm font-display font-bold shrink-0 bg-white/[0.03] px-3 py-1.5 border border-border ${trustTone}`}
           >
             {typeof airdrop.trustScore === "number"
               ? `${airdrop.trustScore}%`
@@ -184,7 +184,7 @@ export function TaskCard({
           {airdropName ?? "Linked airdrop"} • UPDATED{" "}
           {formatRelativeDate(task.completedAt ?? task.createdAt).toUpperCase()}
         </p>
-        <div className="w-full h-1.5 rounded-full bg-white/[0.05] mt-4 overflow-hidden">
+        <div className="w-full h-1.5 bg-white/[0.05] mt-4 overflow-hidden">
           <div
             className="h-full bg-accent transition-all duration-700"
             style={{ width: `${task.progress}%` }}
@@ -209,7 +209,7 @@ export function LeaderboardCard({
 }) {
   return (
     <div className="data-row group">
-      <div className="w-12 h-12 rounded-xl bg-white/[0.03] border-2 border-border flex items-center justify-center shrink-0 group-hover:border-accent/40 transition-colors">
+      <div className="w-12 h-12 bg-white/[0.03] border-2 border-border flex items-center justify-center shrink-0 group-hover:border-accent/40 transition-colors">
         <span className="font-display text-base font-bold text-accent">
           #{rank}
         </span>
@@ -318,7 +318,7 @@ export function WalletSummaryCard({
       </div>
 
       <div className="grid grid-cols-2 gap-4 mb-8">
-        <div className="bg-white/[0.03] border-2 border-border p-4 rounded-xl">
+        <div className="bg-white/[0.03] border-2 border-border p-4">
           <p className="text-[10px] uppercase tracking-wider text-text-muted font-bold mb-2">
             INDICATORS
           </p>
@@ -326,7 +326,7 @@ export function WalletSummaryCard({
             {analysis.risk_indicators.length}
           </p>
         </div>
-        <div className="bg-white/[0.03] border-2 border-border p-4 rounded-xl">
+        <div className="bg-white/[0.03] border-2 border-border p-4">
           <p className="text-[10px] uppercase tracking-wider text-text-muted font-bold mb-2">
             SUSPICIOUS
           </p>
@@ -358,7 +358,7 @@ export function EmptyState({
 }) {
   return (
     <div className="panel-card text-center py-20 px-8">
-      <div className="w-20 h-20 rounded-2xl bg-white/[0.03] border-2 border-border flex items-center justify-center mx-auto mb-6">
+      <div className="w-20 h-20 bg-white/[0.03] border-2 border-border flex items-center justify-center mx-auto mb-6">
         <ArrowRight size={32} className="text-text-muted rotate-45" />
       </div>
       <p className="font-display text-3xl font-bold text-white mb-4">{title}</p>
@@ -396,7 +396,7 @@ export function ErrorState({
 }) {
   return (
     <div className="panel-card text-center py-20 px-8 border-danger/30">
-      <div className="w-20 h-20 rounded-2xl bg-danger/10 border-2 border-danger/20 flex items-center justify-center mx-auto mb-6">
+      <div className="w-20 h-20 bg-danger/10 border-2 border-danger/20 flex items-center justify-center mx-auto mb-6">
         <AlertTriangle size={32} className="text-danger" />
       </div>
       <p className="font-display text-3xl font-bold text-white mb-4">{title}</p>
