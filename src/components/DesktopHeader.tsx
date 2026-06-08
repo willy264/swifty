@@ -109,7 +109,7 @@ export function DesktopHeader({
         </div>
         
         {/* Profile Section */}
-        <div className="flex items-center gap-3 pl-5 border-l border-white/[0.06]">
+        {/* <div className="flex items-center gap-3 pl-5 border-l border-white/[0.06]">
           <div className="w-9 h-9 rounded-full bg-gradient-to-br from-accent/20 to-accent/5 border border-accent/20 flex items-center justify-center shrink-0 overflow-hidden">
             <span className="text-xs font-bold text-accent">
               {user?.username?.slice(0, 2).toUpperCase() ?? "GD"}
@@ -119,7 +119,7 @@ export function DesktopHeader({
             <p className="text-sm font-semibold text-white truncate">@{user?.username ?? "demo"}</p>
             <p className="text-[9px] text-text-muted font-bold uppercase tracking-[0.12em]">Operative</p>
           </div>
-        </div>
+        </div> */}
       </div>
     </header>
   );
