@@ -60,6 +60,7 @@ export interface Airdrop {
   category?: Nullable<string>;
   trustScore?: Nullable<number>;
   difficulty?: Nullable<string>;
+  projectUrl?: Nullable<string>;
   socialLinks: Record<string, string>;
   source: string;
   createdAt: string;

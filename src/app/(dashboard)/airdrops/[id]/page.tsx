@@ -23,8 +23,8 @@ export default async function AirdropDetailPage(
     notFound();
   }
 
-  const website = airdrop.socialLinks.website;
-  const twitter = airdrop.socialLinks.twitter;
+  const socialLinks = airdrop.socialLinks || {};
+  const primaryWebLink = airdrop.projectUrl || socialLinks.website || socialLinks.site || socialLinks.homepage || Object.values(socialLinks)[0];
 
   return (
     <div className="space-y-8 pb-8">
@@ -38,8 +38,8 @@ export default async function AirdropDetailPage(
         action={
           <div className="flex flex-wrap gap-3">
             <LinkButton href="/tasks">Open checklist</LinkButton>
-            {website ? (
-              <LinkButton href={website} external variant="secondary">
+            {primaryWebLink ? (
+              <LinkButton href={primaryWebLink} external variant="secondary">
                 Visit project
               </LinkButton>
             ) : null}
@@ -112,32 +112,40 @@ export default async function AirdropDetailPage(
               <div className="border border-border bg-white/[0.03] p-4">
                 <p className="section-kicker">Project links</p>
                 <div className="mt-4 space-y-3">
-                  {website ? (
+                  {airdrop.projectUrl && (
                     <Link
-                      href={website}
+                      href={airdrop.projectUrl}
                       target="_blank"
                       rel="noreferrer"
                       className="block border border-border px-4 py-3 text-sm text-text-soft transition hover:border-border-strong hover:text-white"
                     >
-                      Website
-                      <span className="mt-1 block text-xs text-text-muted">
-                        {getHostnameFromUrl(website)}
+                      CoinGecko / Source
+                      <span className="mt-1 block text-xs text-text-muted lowercase">
+                        {getHostnameFromUrl(airdrop.projectUrl)}
                       </span>
                     </Link>
-                  ) : null}
-                  {twitter ? (
-                    <Link
-                      href={twitter}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="block border border-border px-4 py-3 text-sm text-text-soft transition hover:border-border-strong hover:text-white"
-                    >
-                      X / Twitter
-                      <span className="mt-1 block text-xs text-text-muted">
-                        {getHostnameFromUrl(twitter)}
-                      </span>
-                    </Link>
-                  ) : null}
+                  )}
+                  {Object.entries(airdrop.socialLinks || {}).length > 0 ? (
+                    Object.entries(airdrop.socialLinks).map(([key, url]) => {
+                      if (!url) return null;
+                      return (
+                        <Link
+                          key={key}
+                          href={url}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="block border border-border px-4 py-3 text-sm text-text-soft transition hover:border-border-strong hover:text-white capitalize"
+                        >
+                          {key}
+                          <span className="mt-1 block text-xs text-text-muted lowercase">
+                            {getHostnameFromUrl(url)}
+                          </span>
+                        </Link>
+                      );
+                    })
+                  ) : !airdrop.projectUrl && (
+                    <p className="text-sm text-text-muted">No external links available.</p>
+                  )}
                 </div>
               </div>
             </div>
