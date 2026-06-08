@@ -20,7 +20,7 @@ export interface NavItem {
 export const primaryNavItems: NavItem[] = [
   {
     href: "/",
-    label: "Command",
+    label: "Dashboard",
     icon: Home,
     description: "Mission control, trending signals, and your daily guardrail.",
   },

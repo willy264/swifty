@@ -80,7 +80,7 @@ export function DesktopHeader({
               <input
                 ref={searchInputRef}
                 type="text"
-                placeholder="Search commands... ⌘K"
+                placeholder="Search dashboard... ⌘K"
                 className="w-full h-full backdrop-blur-xl border-b-2 border-accent focus:border-accent/50 pl-11 pr-4 text-xs font-medium tracking-wider text-white outline-none transition-all placeholder:text-text-muted/60"
                 onBlur={() => {
                   setTimeout(() => {

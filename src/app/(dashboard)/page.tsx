@@ -70,9 +70,9 @@ export default function CommandPage() {
   if (error) {
     return (
       <ErrorState
-        title="Command center degraded"
+        title="Dashboard degraded"
         body={error}
-        action={<RetryHint href="/" label="RELOAD COMMAND" />}
+        action={<RetryHint href="/" label="RELOAD DASHBOARD" />}
       />
     );
   }
@@ -101,7 +101,7 @@ export default function CommandPage() {
     >
       <SectionHeader
         kicker="Central Intelligence"
-        title="Command center for your crypto assets."
+        title="Dashboard for your crypto assets."
         description="SwiftyDrop Guard orchestrates discovery, verification, and retention in a high-performance loop. Audit the market, verify signals, and execute with confidence."
         action={
           <div className="flex flex-wrap gap-4">

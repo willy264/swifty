@@ -1,20 +1,20 @@
 import type { Metadata } from "next";
-import { JetBrains_Mono, Plus_Jakarta_Sans, Outfit } from "next/font/google";
+import { JetBrains_Mono, Inter, Space_Grotesk } from "next/font/google";
 import { TelegramSessionProvider } from "@/providers";
 import { getUser } from "@/lib/api";
 import { DEMO_USER_ID } from "@/data/constants";
 import "./globals.css";
 
-const plusJakartaSans = Plus_Jakarta_Sans({
+const inter = Inter({
   variable: "--font-body",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
 });
 
-const outfit = Outfit({
+const spaceGrotesk = Space_Grotesk({
   variable: "--font-display",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800"],
+  weight: ["300", "400", "500", "600", "700"],
 });
 
 const jetbrainsMono = JetBrains_Mono({
@@ -53,7 +53,7 @@ export default async function RootLayout({
   return (
     <html
       lang="en"
-      className={`${plusJakartaSans.variable} ${outfit.variable} ${jetbrainsMono.variable} h-full antialiased`}
+      className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
       <body className="min-h-full bg-bg-root text-text font-sans">
         <TelegramSessionProvider initialUser={initialUser}>{children}</TelegramSessionProvider>

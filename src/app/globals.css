@@ -1,26 +1,26 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-bg-root:     #0A0515;
-  --color-bg-surface:  #120B22;
-  --color-bg-raised:   #1A1030;
-  --color-bg-input:    #1E1338;
+  --color-bg-root:     #0A001A;
+  --color-bg-surface:  #11002A;
+  --color-bg-raised:   #1A003D;
+  --color-bg-input:    #240050;
 
-  --color-border:      #2A1D45;
-  --color-border-hi:   #3D2D60;
-  --color-border-focus: #2EECC7;
+  --color-border:      #3A0078;
+  --color-border-hi:   #5100A3;
+  --color-border-focus: #00E5FF;
 
   --color-text:        #FFFFFF;
-  --color-text-sub:    #B8A0D4;
-  --color-text-muted:  #6B5A8A;
+  --color-text-sub:    #C2A3FF;
+  --color-text-muted:  #8A66CC;
 
-  --color-accent:      #2EECC7;
-  --color-accent-dim:  #1CC4A0;
-  --color-accent-subtle: rgba(46, 236, 199, 0.08);
+  --color-accent:      #00E5FF;
+  --color-accent-dim:  #00B8CC;
+  --color-accent-subtle: rgba(0, 229, 255, 0.08);
 
-  --color-purple:      #7B3FBF;
-  --color-purple-dim:  #5A2D8E;
-  --color-purple-bright: #9B5FE0;
+  --color-purple:      #7000E0;
+  --color-purple-dim:  #4F009E;
+  --color-purple-bright: #9A2BFF;
 
   --color-gold:        #FACC15;
   --color-warn:        #FACC15;
@@ -28,14 +28,14 @@
   --color-success:     #10B981;
   --color-blue:        #3B82F6;
 
-  --font-sans: "Plus Jakarta Sans", system-ui, sans-serif;
-  --font-display: "Outfit", system-ui, sans-serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-display: "Space Grotesk", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", monospace;
 }
 
 :root {
-  --font-display: "Outfit", system-ui, sans-serif;
-  --font-body: "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-display: "Space Grotesk", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
   --font-data: "JetBrains Mono", monospace;
 }
 
