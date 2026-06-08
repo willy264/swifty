@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Globe, Layers3, ShieldCheck, Target } from "lucide-react";
+import { ArrowLeft, Globe, Layers3, ShieldCheck, Target } from "lucide-react";
 import {
   EmptyState,
   LinkButton,
@@ -28,6 +28,15 @@ export default async function AirdropDetailPage(
 
   return (
     <div className="space-y-8 pb-8">
+      <div>
+        <Link
+          href="/airdrops"
+          className="inline-flex items-center text-sm font-medium text-text-soft transition hover:text-white"
+        >
+          <ArrowLeft className="mr-2" size={16} />
+          Back to Airdrops
+        </Link>
+      </div>
       <SectionHeader
         kicker="Security verification"
         title={airdrop.name}
@@ -125,7 +134,20 @@ export default async function AirdropDetailPage(
                       </span>
                     </Link>
                   )}
-                  {Object.entries(airdrop.socialLinks || {}).length > 0 ? (
+                  
+                  <Link
+                    href={`https://x.com/search?q=$${encodeURIComponent(airdrop.name)}`}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="block border border-border px-4 py-3 text-sm text-text-soft transition hover:border-border-strong hover:text-white"
+                  >
+                    Search on X / Twitter
+                    <span className="mt-1 block text-xs text-text-muted lowercase">
+                      x.com
+                    </span>
+                  </Link>
+
+                  {Object.entries(airdrop.socialLinks || {}).length > 0 && 
                     Object.entries(airdrop.socialLinks).map(([key, url]) => {
                       if (!url) return null;
                       return (
@@ -142,10 +164,7 @@ export default async function AirdropDetailPage(
                           </span>
                         </Link>
                       );
-                    })
-                  ) : !airdrop.projectUrl && (
-                    <p className="text-sm text-text-muted">No external links available.</p>
-                  )}
+                    })}
                 </div>
               </div>
             </div>
