@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { JetBrains_Mono, Inter, Space_Grotesk } from "next/font/google";
+import Script from "next/script";
 import { TelegramSessionProvider } from "@/providers";
 import { getUser } from "@/lib/api";
 import { DEMO_USER_ID } from "@/data/constants";
@@ -54,7 +55,14 @@ export default async function RootLayout({
     <html
       lang="en"
       className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
+      <head>
+        <Script
+          src="https://telegram.org/js/telegram-web-app.js"
+          strategy="beforeInteractive"
+        />
+      </head>
       <body className="min-h-full bg-bg-root text-text font-sans">
         <TelegramSessionProvider initialUser={initialUser}>{children}</TelegramSessionProvider>
       </body>
