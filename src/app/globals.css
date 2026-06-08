@@ -201,6 +201,10 @@ img, svg, canvas {
   border-color: rgba(255, 255, 255, 0.1);
   color: var(--color-text);
   backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.btn-ghost:active {
+  background: rgba(255, 255, 255, 0.1);
 }
 
 /* Inputs with Glass effect */
