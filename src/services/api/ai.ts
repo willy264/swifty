@@ -24,8 +24,9 @@ export async function getRecommendations(
   baseUrl: string,
   input: RecommendDto
 ): Promise<Airdrop[]> {
-  return apiRequest<Airdrop[]>(baseUrl, "/ai/recommendations", {
+  const data = await apiRequest<{ airdrop: Airdrop; fitScore: number; reason: string }[]>(baseUrl, "/ai/recommendations", {
     method: "POST",
     body: JSON.stringify(input),
   });
+  return data.map((item) => item.airdrop);
 }
