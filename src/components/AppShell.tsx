@@ -16,6 +16,7 @@ import { DesktopSidebar } from "./DesktopSidebar";
 import { MobileHeader } from "./MobileHeader";
 import { DesktopHeader } from "./DesktopHeader";
 import { MobileMenu } from "./MobileMenu";
+import { SplashScreen } from "./SplashScreen";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -148,74 +149,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
 
       {/* ── Splash Screen ── shown for first 1.5 s */}
       <AnimatePresence>
-        {!isReady && (
-          <motion.div
-            key="splash"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0, scale: 1.04 }}
-            transition={{ duration: 0.6, ease: "easeInOut" }}
-            className="absolute inset-0 z-50 flex flex-col items-center justify-center gap-6 pointer-events-none"
-          >
-            {/* Logo mark */}
-            <motion.div
-              initial={{ scale: 0.7, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 1.1, opacity: 0 }}
-              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-              className="flex flex-col items-center gap-4"
-            >
-              <div className="relative">
-                <Image src="/guard_logo.png" alt="SwiftyGuard" width={72} height={72} className="object-contain drop-shadow-[0_0_32px_rgba(0,209,255,0.6)]" />
-                {/* Pulsing ring */}
-                <motion.div
-                  className="absolute inset-[-12px] rounded-full border border-accent/30"
-                  animate={{ scale: [1, 1.25, 1], opacity: [0.6, 0, 0.6] }}
-                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                />
-                <motion.div
-                  className="absolute inset-[-24px] rounded-full border border-accent/15"
-                  animate={{ scale: [1, 1.35, 1], opacity: [0.4, 0, 0.4] }}
-                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut", delay: 0.3 }}
-                />
-              </div>
-
-              <div className="text-center">
-                <motion.h1
-                  initial={{ opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.25, duration: 0.6 }}
-                  className="font-display font-bold text-3xl tracking-tighter text-white"
-                >
-                  SWIFTYGUARD
-                </motion.h1>
-                <motion.p
-                  initial={{ opacity: 0, y: 6 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.4, duration: 0.6 }}
-                  className="text-[10px] uppercase tracking-[0.3em] text-accent/80 font-bold mt-1"
-                >
-                  Airdrop Security
-                </motion.p>
-              </div>
-            </motion.div>
-
-            {/* Loading bar */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.5 }}
-              className="w-40 h-[2px] bg-white/10 rounded-full overflow-hidden"
-            >
-              <motion.div
-                className="h-full bg-accent rounded-full"
-                initial={{ width: "0%" }}
-                animate={{ width: "100%" }}
-                transition={{ duration: 1.2, ease: "easeInOut", delay: 0.1 }}
-              />
-            </motion.div>
-          </motion.div>
-        )}
+        {!isReady && <SplashScreen />}
       </AnimatePresence>
 
       <AnimatePresence>
