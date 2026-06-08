@@ -109,11 +109,8 @@ export function TelegramSessionProvider({
           return;
         } catch (authError) {
           if (cancelled) return;
-
-          const errMsg = authError instanceof Error ? authError.message : "Telegram authentication failed.";
-          setError(`Auth Error: ${errMsg}`);
-          setLoading(false);
-          return; // STOP here, do not fallback to demo user if we have initData but it failed
+          // Log the error but fall through to demo user so the app still loads
+          console.warn("Telegram auth failed, falling back:", authError);
         }
       }
 

@@ -6,4 +6,4 @@ export const SESSION_STORAGE_KEY = "swiftydrop-guard-session";
 
 export const DEMO_USER_ID =
   process.env.NEXT_PUBLIC_SWIFTYDROP_DEMO_USER_ID ??
-  "ckxk7g2v90000abcd1234efgh";
+  "cmq04qrqb00001giqjo7u0e2h";
