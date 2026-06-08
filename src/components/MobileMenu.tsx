@@ -93,15 +93,15 @@ export function MobileMenu({ mobileMenuOpen, setMobileMenuOpen, user, allNavItem
                       {isActive && (
                         <div className="absolute inset-0 z-0 pointer-events-none">
                           <svg
-                            className="w-full h-full text-accent overflow-visible"
-                            viewBox="0 0 100 40"
+                            className="w-full h-full text-accent overflow-visible opacity-70"
+                            viewBox="0 0 100 100"
                             preserveAspectRatio="none"
                           >
                             <motion.path
-                              d="M 10,20 Q 5,10 20,5 Q 35,0 50,5 Q 65,0 80,5 Q 95,10 90,20 Q 95,30 80,35 Q 65,40 50,35 Q 35,40 20,35 Q 5,30 10,20 Z"
+                              d="M 2,10 Q 50,0 98,5 Q 100,50 97,95 Q 50,100 5,95 Q 0,50 2,10 Z"
                               fill="none"
                               stroke="currentColor"
-                              strokeWidth="2.5"
+                              strokeWidth="2"
                               strokeLinecap="round"
                               strokeLinejoin="round"
                               vectorEffect="non-scaling-stroke"
