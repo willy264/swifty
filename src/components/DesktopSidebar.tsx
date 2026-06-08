@@ -27,13 +27,13 @@ export function DesktopSidebar({ sidebarOpen, setSidebarOpen, currentNavItem, si
         <div className={`flex ${sidebarOpen ? "items-center justify-between" : "flex-col items-center gap-4 justify-center"}`}>
           {sidebarOpen ? (
             <div className="flex items-center gap-2.5">
-              <Image src="/guard_logo.png" alt="Logo" width={30} height={30} className="object-contain" />
+              <Image src="/swifty_logo.png" alt="Logo" width={30} height={30} className="object-contain" />
               <h1 className="font-display font-bold text-xl tracking-tighter text-white">
                 SWIFTYGUARD
               </h1>
             </div>
           ) : (
-            <Image src="/guard_logo.png" alt="Logo" width={26} height={26} className="object-contain" />
+            <Image src="/swifty_logo.png" alt="Logo" width={26} height={26} className="object-contain" />
           )}
           <motion.button
             whileHover={{ scale: 1.05 }}

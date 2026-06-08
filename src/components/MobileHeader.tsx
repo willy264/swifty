@@ -11,7 +11,7 @@ export function MobileHeader({ setMobileMenuOpen }: { setMobileMenuOpen: (v: boo
         <div className="relative z-10 flex items-center justify-between gap-3">
           <div className="flex items-center gap-3">
             <div className="w-11 h-11 rounded-xl bg-bg-surface/80 backdrop-blur-xl border border-white/10 flex items-center justify-center shrink-0 overflow-hidden">
-              <Image src="/guard_logo.png" alt="Logo" width={28} height={28} className="object-contain" />
+              <Image src="/swifty_logo.png" alt="Logo" width={28} height={28} className="object-contain" />
             </div>
             <span>
               <span className="block text-lg font-bold tracking-tighter text-white">SWIFTYGUARD</span>

@@ -45,7 +45,7 @@ export function MobileMenu({ mobileMenuOpen, setMobileMenuOpen, user, allNavItem
           >
             <div className="p-6 border-b border-white/[0.06] flex items-center justify-between bg-bg-surface/50 backdrop-blur-xl">
               <div className="flex items-center gap-3">
-                <Image src="/guard_logo.png" alt="Logo" width={28} height={28} className="object-contain" />
+                <Image src="/swifty_logo.png" alt="Logo" width={28} height={28} className="object-contain" />
                 <span className="font-display font-bold text-lg text-white tracking-tighter">SWIFTYGUARD</span>
               </div>
               <button 
