@@ -157,7 +157,7 @@ export default function CommandPage() {
             <div>
               <p className="section-kicker">Asset Discovery</p>
               <h2 className="font-display text-3xl font-bold text-white">
-                Featured Ops
+                Featured Airdrops
               </h2>
               <p className="mt-2 max-w-xl text-sm leading-relaxed text-text-sub">
                 Lightweight visual signals anchored in hard risk context. Move only when the evidence matches your posture.

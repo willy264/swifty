@@ -48,7 +48,7 @@ export function MobileMenu({ mobileMenuOpen, setMobileMenuOpen, user, allNavItem
                 <Image src="/swifty_logo.png" alt="Logo" width={28} height={28} className="object-contain" />
                 <span className="font-display font-bold text-lg text-white tracking-tighter">SWIFTYGUARD</span>
               </div>
-              <button 
+              <button
                 onClick={() => setMobileMenuOpen(false)}
                 className="p-2 bg-white/[0.04] backdrop-blur-sm border border-white/[0.08] text-white"
               >
@@ -84,40 +84,49 @@ export function MobileMenu({ mobileMenuOpen, setMobileMenuOpen, user, allNavItem
                     <motion.div
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.96 }}
-                      className={`relative flex items-center justify-between p-4 transition-all duration-200 group ${
-                        isActive
+                      className={`relative flex items-center justify-between p-4 transition-all duration-200 group ${isActive
                           ? "text-accent"
                           : "text-white/80"
-                      }`}
+                        }`}
                     >
-                      {isActive && (
-                        <div className="absolute inset-0 z-0 pointer-events-none">
-                          <svg
-                            className="w-full h-full text-accent overflow-visible opacity-70"
-                            viewBox="0 0 100 100"
-                            preserveAspectRatio="none"
-                          >
-                            <motion.path
-                              d="M 2,10 Q 50,0 98,5 Q 100,50 97,95 Q 50,100 5,95 Q 0,50 2,10 Z"
-                              fill="none"
-                              stroke="currentColor"
-                              strokeWidth="2"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              vectorEffect="non-scaling-stroke"
-                              initial={{ pathLength: 0 }}
-                              animate={{ pathLength: 1 }}
-                              transition={{ duration: 0.5, ease: "easeOut" }}
-                            />
-                          </svg>
-                        </div>
-                      )}
                       <div className="relative z-10 flex items-center gap-4">
                         <item.icon size={20} className={`${isActive ? "text-accent" : "text-white/40 group-hover:text-white"}`} />
-                        <div>
+                        <div className="relative inline-block">
                           <span className={`text-sm font-bold uppercase tracking-widest block ${isActive ? "text-accent" : "text-white group-hover:text-white"}`}>{item.label}</span>
                           <span className={`text-[10px] font-medium mt-0.5 block ${isActive ? "text-accent/70" : "text-text-muted"}`}>{item.description}</span>
                         </div>
+                        {isActive && (
+                          <svg
+                            className="absolute -bottom-3 left-0 w-full overflow-visible"
+                            viewBox="0 0 120 12"
+                            fill="none"
+                            preserveAspectRatio="none"
+                            height="10"
+                          >
+                            <motion.path
+                              d="M2,7 C10,4 20,9 35,5 C50,1 55,8 70,6 C85,4 95,9 108,5 C112,4 116,6 118,5"
+                              stroke="var(--color-accent)"
+                              strokeWidth="2.5"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              fill="none"
+                              initial={{ pathLength: 0, opacity: 0 }}
+                              animate={{ pathLength: 1, opacity: 1 }}
+                              transition={{ duration: 0.4, ease: "easeOut" }}
+                            />
+                            <motion.path
+                              d="M5,9 C15,6 30,11 45,7 C60,3 70,10 85,7 C100,4 110,8 115,7"
+                              stroke="var(--color-accent)"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              fill="none"
+                              initial={{ pathLength: 0, opacity: 0 }}
+                              animate={{ pathLength: 1, opacity: 0.6 }}
+                              transition={{ duration: 0.5, ease: "easeOut", delay: 0.15 }}
+                            />
+                          </svg>
+                        )}
                       </div>
                       <ArrowRight size={16} className={`relative z-10 shrink-0 ${isActive ? "text-accent" : "text-text-muted group-hover:text-white"}`} />
                     </motion.div>

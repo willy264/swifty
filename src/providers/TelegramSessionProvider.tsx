@@ -101,15 +101,19 @@ export function TelegramSessionProvider({
           setAuthenticatedViaTelegram(true);
           setError(null);
           setLoading(false);
+          // Tell Telegram we are ready and expand the view
+          if (typeof window !== "undefined" && (window as any).Telegram?.WebApp) {
+            (window as any).Telegram.WebApp.ready();
+            (window as any).Telegram.WebApp.expand();
+          }
           return;
         } catch (authError) {
           if (cancelled) return;
 
-          setError(
-            authError instanceof Error
-              ? authError.message
-              : "Telegram authentication failed."
-          );
+          const errMsg = authError instanceof Error ? authError.message : "Telegram authentication failed.";
+          setError(`Auth Error: ${errMsg}`);
+          setLoading(false);
+          return; // STOP here, do not fallback to demo user if we have initData but it failed
         }
       }
 
