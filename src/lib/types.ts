@@ -31,6 +31,7 @@ export interface User {
   referralCode: string;
   referredById?: Nullable<string>;
   createdAt: string;
+  preferences?: Nullable<Record<string, any>>;
 }
 
 export interface UserStats {
@@ -64,6 +65,11 @@ export interface Airdrop {
   socialLinks: Record<string, string>;
   source: string;
   createdAt: string;
+  aiLegitScore?: Nullable<number>;
+  aiOutlook?: Nullable<string>;
+  aiFlags?: string[];
+  aiSummary?: Nullable<string>;
+  aiAssessedAt?: Nullable<string>;
 }
 
 export interface SecurityReport {
@@ -173,4 +179,17 @@ export interface DashboardData {
     tasks: DataSectionStatus;
     referrals: DataSectionStatus;
   };
+}
+
+export interface SetPreferencesDto {
+  userId: string;
+  categories?: string[];
+  chains?: string[];
+  riskTolerance?: "low" | "medium" | "high";
+  effort?: "low" | "medium" | "high";
+}
+
+export interface RecommendDto {
+  userId: string;
+  limit?: number;
 }

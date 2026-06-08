@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import { AlertTriangle, ShieldAlert, Wallet2, Zap } from "lucide-react";
 import {
   EmptyState,
@@ -7,26 +10,60 @@ import {
   RetryHint,
   SectionHeader,
   WalletSummaryCard,
+  LoadingState,
 } from "@/components/GuardPrimitives";
 import { analyzeWallet, getDashboardData } from "@/lib/api";
 import { DEMO_USER_ID } from "@/data/constants";
+import { useTelegramSession } from "@/providers/TelegramSessionProvider";
+import type { DashboardData, WalletAnalysis } from "@/lib/types";
 
-export default async function WalletPage() {
-  const dashboard = await getDashboardData(DEMO_USER_ID);
-  const walletAddress = dashboard.user?.walletAddress;
-  let liveAnalysis = null;
-  let analysisError: string | null = null;
+export default function WalletPage() {
+  const { user: sessionUser, loading: sessionLoading } = useTelegramSession();
+  const [dashboard, setDashboard] = useState<DashboardData | null>(null);
+  const [liveAnalysis, setLiveAnalysis] = useState<WalletAnalysis | null>(null);
+  const [analysisError, setAnalysisError] = useState<string | null>(null);
 
-  if (walletAddress) {
-    try {
-      liveAnalysis = await analyzeWallet(walletAddress);
-    } catch (error) {
-      analysisError =
-        error instanceof Error
-          ? error.message
-          : "Wallet analysis request failed.";
-    }
+  useEffect(() => {
+    if (sessionLoading) return;
+    const fetchUserId = sessionUser?.id || DEMO_USER_ID;
+
+    let cancelled = false;
+
+    getDashboardData(fetchUserId)
+      .then(async (data) => {
+        if (cancelled) return;
+        setDashboard(data);
+        const walletAddress = data.user?.walletAddress;
+        
+        if (walletAddress) {
+          try {
+            const analysis = await analyzeWallet(walletAddress);
+            if (!cancelled) setLiveAnalysis(analysis);
+          } catch (error) {
+            if (!cancelled) {
+              setAnalysisError(
+                error instanceof Error
+                  ? error.message
+                  : "Wallet analysis request failed."
+              );
+            }
+          }
+        }
+      })
+      .catch((err) => {
+        if (!cancelled) setAnalysisError("Failed to load dashboard data.");
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [sessionUser?.id, sessionLoading]);
+
+  if (!dashboard) {
+    return <LoadingState label="FETCHING_WALLET_DATA..." />;
   }
+
+  const walletAddress = dashboard.user?.walletAddress;
 
   return (
     <div className="space-y-8 pb-8">

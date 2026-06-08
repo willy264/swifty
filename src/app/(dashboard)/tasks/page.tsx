@@ -12,8 +12,9 @@ import {
   SectionHeader,
   TaskCard,
 } from "@/components/GuardPrimitives";
-import { getDashboardData } from "@/services";
+import { getDashboardData } from "@/services/api/aggregations";
 import { DEMO_USER_ID } from "@/data/constants";
+import { useTelegramSession } from "@/providers/TelegramSessionProvider";
 import type { AirdropTask, DashboardData } from "@/lib/types";
 
 const staggerContainer = {
@@ -29,9 +30,13 @@ const staggerContainer = {
 export default function TasksPage() {
   const [data, setData] = useState<DashboardData | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const { user: sessionUser, loading: sessionLoading } = useTelegramSession();
 
   useEffect(() => {
-    getDashboardData(DEMO_USER_ID)
+    if (sessionLoading) return;
+    const fetchUserId = sessionUser?.id || DEMO_USER_ID;
+
+    getDashboardData(fetchUserId)
       .then((result) => {
         setData(result);
         setError(result.status.tasks.ok ? null : result.status.tasks.message ?? "Task request failed.");
@@ -40,7 +45,7 @@ export default function TasksPage() {
         setData(null);
         setError(reason instanceof Error ? reason.message : "Task request failed.");
       });
-  }, []);
+  }, [sessionUser?.id, sessionLoading]);
 
   if (!data) {
     return <LoadingState label="RETRIEVING_QUEUE..." />;

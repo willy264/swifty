@@ -170,10 +170,50 @@ export default async function AirdropDetailPage(
             </div>
           </div>
 
-          <EmptyState
-            title="Security analysis unavailable"
-            body="This screen is now using the live API directly. A detailed scam-analysis payload was not available for this airdrop at render time, so no mock report is being substituted."
-          />
+          {airdrop.aiLegitScore !== null && airdrop.aiLegitScore !== undefined ? (
+            <div className="panel-card p-5">
+              <p className="section-kicker">Gemini AI Assessment</p>
+              <div className="mt-4 grid gap-4 sm:grid-cols-2">
+                <div>
+                  <h3 className="font-display text-2xl font-semibold text-white">
+                    Score: {airdrop.aiLegitScore}/100
+                  </h3>
+                  <p className="mt-1 text-sm text-text-soft">
+                    Outlook: <span className="text-white capitalize">{airdrop.aiOutlook}</span>
+                  </p>
+                </div>
+                {airdrop.aiFlags && airdrop.aiFlags.length > 0 && (
+                  <div>
+                    <p className="text-sm font-semibold text-white">Risk Flags:</p>
+                    <ul className="mt-2 space-y-1">
+                      {airdrop.aiFlags.map((flag) => (
+                        <li key={flag} className="text-sm text-red-400">
+                          • {flag}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </div>
+              {airdrop.aiSummary && (
+                <div className="mt-5 border-t border-border pt-5">
+                  <p className="text-sm leading-relaxed text-text-soft">
+                    {airdrop.aiSummary}
+                  </p>
+                </div>
+              )}
+              {airdrop.aiAssessedAt && (
+                <p className="mt-4 text-xs text-text-muted">
+                  Assessed at {formatDate(airdrop.aiAssessedAt)}
+                </p>
+              )}
+            </div>
+          ) : (
+            <EmptyState
+              title="AI Assessment unavailable"
+              body="No Gemini legitimacy assessment is available for this airdrop yet. Our AI will analyze it shortly."
+            />
+          )}
         </div>
 
         <div className="space-y-4">

@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import { Gift, Sparkle, Trophy, Users } from "lucide-react";
 import {
   ErrorState,
@@ -5,22 +8,47 @@ import {
   MetricTile,
   RetryHint,
   SectionHeader,
+  LoadingState,
 } from "@/components/GuardPrimitives";
-import { getDashboardData } from "@/services";
+import { getDashboardData } from "@/services/api/aggregations";
 import { DEMO_USER_ID } from "@/data/constants";
+import { useTelegramSession } from "@/providers/TelegramSessionProvider";
+import type { DashboardData } from "@/lib/types";
 
-export default async function LeaderboardPage() {
-  const dashboard = await getDashboardData(DEMO_USER_ID);
+export default function LeaderboardPage() {
+  const { user: sessionUser, loading: sessionLoading } = useTelegramSession();
+  const [dashboard, setDashboard] = useState<DashboardData | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
-  if (!dashboard.status.leaderboard.ok || !dashboard.status.referrals.ok) {
+  useEffect(() => {
+    if (sessionLoading) return;
+    const fetchUserId = sessionUser?.id || DEMO_USER_ID;
+    
+    getDashboardData(fetchUserId)
+      .then((data) => {
+        setDashboard(data);
+        if (!data.status.leaderboard.ok || !data.status.referrals.ok) {
+          setError(
+            data.status.leaderboard.message ??
+            data.status.referrals.message ??
+            "The live leaderboard data could not be retrieved."
+          );
+        }
+      })
+      .catch((err) => {
+        setError(err instanceof Error ? err.message : "Failed to load leaderboard.");
+      });
+  }, [sessionUser?.id, sessionLoading]);
+
+  if (!dashboard) {
+    return <LoadingState label="FETCHING_LEADERBOARD..." />;
+  }
+
+  if (error) {
     return (
       <ErrorState
         title="Leaderboard offline"
-        body={
-          dashboard.status.leaderboard.message ??
-          dashboard.status.referrals.message ??
-          "The live leaderboard data could not be retrieved."
-        }
+        body={error}
         action={<RetryHint href="/leaderboard" label="RELOAD UPLINK" />}
       />
     );

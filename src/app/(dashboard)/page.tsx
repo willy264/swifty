@@ -21,8 +21,10 @@ import {
   TaskCard,
 } from "@/components/GuardPrimitives";
 import { useEffect, useState } from "react";
-import { getDashboardData } from "@/services";
+import { getDashboardData } from "@/services/api/aggregations";
+import { getRecommendations } from "@/lib/api";
 import { DEMO_USER_ID } from "@/data/constants";
+import { useTelegramSession } from "@/providers/TelegramSessionProvider";
 import type {
   Airdrop,
   AirdropTask,
@@ -45,9 +47,13 @@ const staggerContainer = {
 export default function CommandPage() {
   const [data, setData] = useState<DashboardData | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [recommendations, setRecommendations] = useState<Airdrop[] | null>(null);
+  const { user: sessionUser, loading: sessionLoading } = useTelegramSession();
 
   useEffect(() => {
-    getDashboardData(DEMO_USER_ID)
+    if (sessionLoading) return;
+    const fetchUserId = sessionUser?.id || DEMO_USER_ID;
+    getDashboardData(fetchUserId)
       .then((result) => {
         setData(result);
         const messages = [
@@ -61,7 +67,15 @@ export default function CommandPage() {
         setData(null);
         setError(reason instanceof Error ? reason.message : "Dashboard request failed.");
       });
-  }, []);
+  }, [sessionUser?.id, sessionLoading]);
+
+  useEffect(() => {
+    if (data?.user?.id) {
+      getRecommendations({ userId: data.user.id, limit: 2 })
+        .then(setRecommendations)
+        .catch(console.error);
+    }
+  }, [data?.user?.id]);
 
   if (!data) {
     return <LoadingState label="SYNCHRONIZING_CORE..." />;
@@ -152,7 +166,46 @@ export default function CommandPage() {
       </div>
 
       <div className="grid gap-6 xl:grid-cols-[minmax(0,1.35fr)_minmax(0,0.95fr)]">
-        <section className="panel-card p-8">
+        <div className="flex flex-col gap-6">
+          <section className="panel-card p-8 border-accent/20 border-2">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between mb-8">
+              <div>
+                <p className="section-kicker text-accent">Gemini Intelligence</p>
+                <h2 className="font-display text-3xl font-bold text-white">
+                  For You
+                </h2>
+                <p className="mt-2 max-w-xl text-sm leading-relaxed text-text-sub">
+                  AI-curated opportunities tailored to your risk and effort preferences.
+                </p>
+              </div>
+            </div>
+
+            <div className="grid gap-6 lg:grid-cols-2">
+              {recommendations === null ? (
+                <div className="lg:col-span-2">
+                  <LoadingState label="ANALYZING_PREFERENCES..." />
+                </div>
+              ) : recommendations.length > 0 ? (
+                recommendations.map((airdrop: Airdrop) => (
+                  <AirdropCard
+                    key={airdrop.id}
+                    airdrop={airdrop}
+                    href={`/airdrops/${airdrop.id}`}
+                  />
+                ))
+              ) : (
+                <div className="lg:col-span-2">
+                  <EmptyState
+                    title="No exact matches"
+                    body="Gemini couldn't find active campaigns matching your exact preferences right now."
+                    action={<LinkButton href="/profile">UPDATE PREFERENCES</LinkButton>}
+                  />
+                </div>
+              )}
+            </div>
+          </section>
+
+          <section className="panel-card p-8">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between mb-8">
             <div>
               <p className="section-kicker">Asset Discovery</p>
@@ -188,6 +241,7 @@ export default function CommandPage() {
             )}
           </div>
         </section>
+        </div>
 
         <section className="space-y-6">
           <div className="panel-card p-8">

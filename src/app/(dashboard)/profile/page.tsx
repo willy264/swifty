@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import { Gift, ShieldCheck, Wallet2 } from "lucide-react";
 import {
   ErrorState,
@@ -5,22 +8,44 @@ import {
   MetricTile,
   RetryHint,
   SectionHeader,
+  LoadingState,
 } from "@/components/GuardPrimitives";
-import { getDashboardData } from "@/services";
+import { getDashboardData } from "@/services/api/aggregations";
 import { DEMO_USER_ID } from "@/data/constants";
 import { formatDate, prettifyLabel } from "@/lib/utils";
+import { useTelegramSession } from "@/providers/TelegramSessionProvider";
+import type { DashboardData } from "@/lib/types";
 
-export default async function ProfilePage() {
-  const dashboard = await getDashboardData(DEMO_USER_ID);
+export default function ProfilePage() {
+  const { user: sessionUser, loading: sessionLoading } = useTelegramSession();
+  const [dashboard, setDashboard] = useState<DashboardData | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
-  if (!dashboard.status.user.ok) {
+  useEffect(() => {
+    if (sessionLoading) return;
+    const fetchUserId = sessionUser?.id || DEMO_USER_ID;
+    
+    getDashboardData(fetchUserId)
+      .then((data) => {
+        setDashboard(data);
+        if (!data.status.user.ok) {
+          setError(data.status.user.message ?? "The live user profile could not be retrieved.");
+        }
+      })
+      .catch((err) => {
+        setError(err instanceof Error ? err.message : "Failed to load profile.");
+      });
+  }, [sessionUser?.id, sessionLoading]);
+
+  if (!dashboard) {
+    return <LoadingState label="FETCHING_IDENTITY_RECORD..." />;
+  }
+
+  if (error) {
     return (
       <ErrorState
         title="Profile unavailable"
-        body={
-          dashboard.status.user.message ??
-          "The live user profile could not be retrieved."
-        }
+        body={error}
         action={<RetryHint href="/profile" label="RELOAD PROFILE" />}
       />
     );

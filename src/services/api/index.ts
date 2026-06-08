@@ -29,3 +29,8 @@ export {
 } from "./crypto";
 export { sendNotification } from "./notifications";
 export { getHealth, getServiceBanner } from "./health";
+export {
+  assessAirdrop,
+  setPreferences,
+  getRecommendations,
+} from "./ai";

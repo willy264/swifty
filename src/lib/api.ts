@@ -1,3 +1,4 @@
+import * as aiApi from "@/services/api/ai";
 import * as airdropApi from "@/services/api/airdrops";
 import * as authApi from "@/services/api/auth";
 import * as cryptoApi from "@/services/api/crypto";
@@ -102,4 +103,20 @@ export function sendNotification(
   input: Parameters<typeof notificationApi.sendNotification>[1]
 ) {
   return notificationApi.sendNotification(API_BASE_URL, input);
+}
+
+export function assessAirdrop(airdropId: string) {
+  return aiApi.assessAirdrop(API_BASE_URL, airdropId);
+}
+
+export function setPreferences(
+  input: Parameters<typeof aiApi.setPreferences>[1]
+) {
+  return aiApi.setPreferences(API_BASE_URL, input);
+}
+
+export function getRecommendations(
+  input: Parameters<typeof aiApi.getRecommendations>[1]
+) {
+  return aiApi.getRecommendations(API_BASE_URL, input);
 }
